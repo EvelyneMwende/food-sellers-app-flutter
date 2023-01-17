@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:foodpanda_sellers_app/widgets/custom_text_field.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -22,14 +24,38 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController locationController = TextEditingController();
 
 
+  //profile picture
   XFile? imageXFile;
   final ImagePicker _picker = ImagePicker();
+
+  //location
+  Position? position;
+  List<Placemark>? placemarks;
+
 
   Future<void> getImage() async {
     imageXFile = await _picker.pickImage(source: ImageSource.gallery);
     setState(() {//this is to refresh the image
       imageXFile;
     });
+  }
+
+  //get current location
+  getCurrentLocation() async {
+    Position newPosition = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    position = newPosition;
+
+    placemarks = await placemarkFromCoordinates(
+        position!.latitude,
+        position!.longitude
+    );
+
+    Placemark pMark = placemarks![0];
+    //get text address from longitude and latitude
+    String completeAddress = '${pMark.subThoroughfare}, ${pMark.thoroughfare}, ${pMark.subLocality}, ${pMark.locality}, ${pMark.subAdministrativeArea}, ${pMark.administrativeArea}, ${pMark.postalCode}, ${pMark.country}';
+
+    locationController.text = completeAddress;
+
   }
 
   @override
@@ -108,7 +134,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                      label: const Text("Get my Current Location", style: TextStyle(color: Colors.white)),
                       icon: const Icon(Icons.location_on, color: Colors.white,
                       ),
-                      onPressed: ()=>print("clicked"),
+                      onPressed: (){
+                       //onclick of the location button call the function
+                        getCurrentLocation();
+                      },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.amber,
                       shape: RoundedRectangleBorder(
