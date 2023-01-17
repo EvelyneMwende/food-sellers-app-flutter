@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "522905958381",
+    "project_id": "foodpanda-cloneapp-45e69",
+    "storage_bucket": "foodpanda-cloneapp-45e69.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:522905958381:android:750510363d99339b2359e4",
+        "android_client_info": {
+          "package_name": "com.eve.sellersapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "522905958381-7oldntf2phq4etuf2v2hua2n3u4n2d4b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpu2Ohib2668qHRCq_GvhCBRS-yFeEMwY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "522905958381-7oldntf2phq4etuf2v2hua2n3u4n2d4b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
